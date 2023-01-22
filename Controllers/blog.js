@@ -49,7 +49,7 @@ exports.deleteBlog = async (req, res, next) => {
     const { id } = req.query
     await db.blog.destroy({ where: { id: id } })
     await db.tag.destroy({ where: { b_id: id } })
-    res.status(200).send('deleted blog!')
+    res.status(200).json({ message: 'blog deleted successfully' })
   } catch (e) {
     next(e)
   }
@@ -165,7 +165,7 @@ exports.likeBlog = async (req, res, next) => {
     )
     await blog.addLiker(user)
     console.log(blog)
-    res.status(200).send('upblog')
+    res.status(200).json({ message: 'blog liked successfully' })
   } catch (e) {
     next(e)
   }
@@ -189,7 +189,7 @@ exports.unlikeBlog = async (req, res, next) => {
     )
     await blog.removeLiker(user)
     console.log(blog)
-    res.status(200).send('upblog')
+    res.status(200).json({ message: 'blog disliked successfully' })
   } catch (e) {
     next(e)
   }

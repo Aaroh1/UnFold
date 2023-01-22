@@ -2,6 +2,10 @@
   "name": "backend-webkriti",
   "version": "1.0.0",
   "description": "",
+  "apidoc": {
+    "title": "Custom apiDoc browser title",
+    "url" : "https://unfold.onrender.com/api"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",

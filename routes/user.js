@@ -5,9 +5,31 @@ const upload = require("../Config/multerConfig");
 const auth = require('../Middlewares/tokenauth');
 
 router.get('/currentuser',auth ,usercontroller.user);
-
 router.get('/getuserinfo',auth ,usercontroller.getuserinfo);
-
+/**
+ * @api{get} /user/getuserinfo get User
+ * @apiName getuserinfo
+ * @apiGroup users
+ * @apiHeader {String} Authorization The jwt token that is generated after signing in/up.
+ * @apiSuccess {Object}  user details about user
+ * @apiSuccessExample {json} user 
+ * {
+ *      "user":
+ *      {"id": 1,
+ *      "firstName": "Abc",
+ *      "lastName": "DEF",
+ *      "email" :"a@W.com"    
+ *      "password": "12",
+ *      "about" :"Hello"     
+*      "imageurl":"https://cloudinary/12e33r",
+ *      "cloudid":"asdasdcvw221sdf"   
+ *      "updated_at": "2016-02-10T15:46:51.778Z",
+ *      "created_at": "2016-02-10T15:46:51.778Z"}
+ *    }
+ * @apiError (500) {json} Database error 
+ * @apiErrorExample (500)    
+ * {error: 'Database error'}
+ */
 router.get('/getFollowingblogs',auth , usercontroller.getFollowingblogs)
 
 router.get('/getbookmarkedblogs',auth , usercontroller.getbookmarkedblogs)

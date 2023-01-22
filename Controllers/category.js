@@ -31,7 +31,7 @@ exports.addcategorytoblog = async (req, res, next) => {
         c_id: cat.dataValues.id,
       });
     })
-    res.status(200).json({data:'done'})
+    res.status(200).json({message:'category added successfully'})
   } catch (e) {
     next(e)
   }
