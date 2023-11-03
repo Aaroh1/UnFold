@@ -10,7 +10,7 @@ router.get('/getuserinfo',auth ,usercontroller.getuserinfo);
  * @api{get} /user/getuserinfo get User
  * @apiName getuserinfo
  * @apiGroup users
- * @apiHeader {String} Authorization The jwt token that is generated after signing in/up.
+ * @apiHeader {String} token The jwt token that is generated after signing in/up.
  * @apiSuccess {Object}  user details about user
  * @apiSuccessExample {json} user 
  * {
@@ -33,9 +33,43 @@ router.get('/getuserinfo',auth ,usercontroller.getuserinfo);
 router.get('/getFollowingblogs',auth , usercontroller.getFollowingblogs)
 
 router.get('/getbookmarkedblogs',auth , usercontroller.getbookmarkedblogs)
-
+/**
+ * @api {get} /user/getbookmarkedblogs get blogs bookmarked by user
+ * @apiName getbookmarkedblogs
+ * @apiGroup Users
+ * @apiHeader {String} token The jwt token that is generated after signing in/up.
+ * @apiQuery {UID} id Blog id
+ * @apiSuccess {String[]} bblogs ids of all bookmarked blogs.
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "bblogs":[
+ *              "addb08654-ced11faf"
+ *         ],
+ *     }
+ ** @apiError (500) {json} Database error 
+ * @apiErrorExample (500)    
+ * {error: 'Database error'}
+ */
 router.get('/getFollowers',auth ,usercontroller.getFollowers)
-
+/**
+ * @api {get} /user/getFollowers get followers of user
+ * @apiName getFollowers
+ * @apiGroup Users
+ * @apiHeader {String} token The jwt token that is generated after signing in/up.
+ * @apiQuery {UID} id User id
+ * @apiSuccess {user[]} bblogs array of followers of user type
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *      "bblogs":[
+ *              "addb08654-ced11faf"
+ *         ],
+ *     }
+ ** @apiError (500) {json} Database error 
+ * @apiErrorExample (500)    
+ * {error: 'Database error occurred while signing in!'}
+ */
 router.get('/getFollowing',auth ,usercontroller.getFollowing)
 
 router.get('/getallusers',auth ,usercontroller.getallusers)

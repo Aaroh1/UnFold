@@ -11,6 +11,7 @@ const commentRoutes = require('./routes/comment')
 const categoryRoutes = require('./routes/category')
 const { error } = require('./Middlewares/error')
 const cors = require('cors')
+const { addOriginalCategories } = require('./Config/addCategories')
 dotenv.config()
 
 const app = express()
@@ -19,7 +20,7 @@ app.use(cookieparser())
 app.use(cors({}))
 app.use(express.static('public'))
 
-app.set('views', path.join(__dirname, 'views'))
+// app.set('views', path.join(__dirname, 'views'))
 
 app.use(
   bodyParser.urlencoded({
@@ -30,7 +31,10 @@ app.use(
 app.use(express.json())
 app.use(express.static('public'))
 
-app.get('/', (_, res) => {
+app.use(async () => {
+  await addOriginalCategories()
+})
+app.get('/', async (_, res) => {
   res.redirect('/')
 })
 app.use('/api', slashRoutes)
