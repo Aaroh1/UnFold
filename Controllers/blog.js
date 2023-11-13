@@ -24,7 +24,7 @@ exports.addBlog = async (req, res, next) => {
     if (!req.file || !r.title || !r.content) throw new Error('Please fill all entries!!')
     const result = await cloudinary.uploader.upload(req.file.path)
     console.log('id is ', req.query.id)
-    const user = await db.user.findOne({ where: { id: req.query.id } })
+    const user = await db.user.findOne({ where: { id: req.userid } })
     if (!user) {
       res.status(400).json({
         error: 'No user Found!',

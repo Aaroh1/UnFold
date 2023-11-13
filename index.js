@@ -31,9 +31,9 @@ app.use(
 app.use(express.json())
 app.use(express.static('public'))
 
-app.use(async () => {
-  await addOriginalCategories()
-})
+// app.use(async () => {
+//   await addOriginalCategories()
+// })
 app.get('/', async (_, res) => {
   res.redirect('/')
 })

@@ -204,7 +204,7 @@ button.addEventListener('click', async () => {
     const addedblogid = addedblog.blogid
     console.log(addedblogid)
     await handleCats(selectedCboxes, addedblogid)
-    alert('Done')
+    alert('Blog Added Successfully')
     location.href = `../../Blog/?id=${addedblogid}`
   }
 })

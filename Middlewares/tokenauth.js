@@ -3,22 +3,27 @@ const db = require('../Config/dbconfig')
 module.exports = (req, res, next) => {
   try {
     console.log(req.cookies)
-    const token = req.cookies.token;
+    const token = req.cookies.token
     if (!token) {
       //if no token is present
-      res.redirect("/");
+      res.redirect('/')
     }
-    jwt.verify(token, process.env.secretstring, (err, decoded) => {
+    jwt.verify(token, process.env.secretstring, async (err, decoded) => {
       if (err) {
         //If some error occurs
         res.status(400).json({
           error: 'User not Signed in, Sign in First.',
         })
       } else {
-        console.log(decoded);
-        req.userEmail=decoded.email;
-        req.userid = decoded.id;
-        }
+        console.log(decoded)
+        const userDoc = await db.user.findOne({ where: { email: decoded.email } })
+        if (!userDoc)
+          res.status(400).json({
+            error: 'User not Signed in, Sign in First.',
+          })
+        req.userEmail = userDoc.email
+        req.userid = userDoc.id
+      }
     })
     next()
   } catch (err) {

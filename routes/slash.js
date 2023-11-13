@@ -4,7 +4,8 @@ const cloudinary=require('../Config/cloudinaryConfig');
 const upload = require('../Config/multerConfig')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const auth= require('../Middlewares/tokenauth')
+const auth= require('../Middlewares/tokenauth');
+const db = require('../Config/dbconfig');
 router.post('/register', upload.single('item'),  async (req, res, next) => {
   try {
       
@@ -51,6 +52,7 @@ router.post('/register', upload.single('item'),  async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   try {
+    console.log('login', req.body)
     const { email, password } = req.body
     if (!email) {
       res.status(400).json({
@@ -88,6 +90,7 @@ router.post('/login', async (req, res, next) => {
       })
     }
   } catch (err) {
+    console.log(err)
     next(err)
   }
 })
